@@ -10,4 +10,7 @@ class CategoryGroup
     @colour = options['colour']
   end
 
+  CRUD
+
+
 end

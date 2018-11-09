@@ -1,8 +1,15 @@
 DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS category_groups;
+DROP TABLE IF EXISTS time_periods;
+
+
 -- DROP TABLE IF EXISTS budgets
 
+CREATE TABLE time_periods(
+  id SERIAL8 PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE category_groups (
   id SERIAL8 PRIMARY KEY,

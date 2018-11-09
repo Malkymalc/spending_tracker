@@ -21,4 +21,7 @@ class Transaction
     return @amount / time_period.get_divisor()
   end
 
+  CRUD
+
+
 end

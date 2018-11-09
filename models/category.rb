@@ -10,4 +10,7 @@ class Category
     @category_group_id = options['category_group_id'].to_i
   end
 
+  CRUD
+
+
 end
