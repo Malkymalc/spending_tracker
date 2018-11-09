@@ -1,10 +1,18 @@
-DROP TABLE IF EXISTS transactions
-DROP TABLE IF EXISTS categories
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS category_groups;
 -- DROP TABLE IF EXISTS budgets
+
+
+CREATE TABLE category_groups (
+  id SERIAL8 PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE categories (
   id SERIAL8 PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
+  category_group_id INT4 REFERENCES category_groups(id) ON DELETE CASCADE
 );
 
 CREATE TABLE transactions (
@@ -12,7 +20,7 @@ CREATE TABLE transactions (
   amount FLOAT NOT NULL,
   date_ DATE NOT NULL,
   --(YYYY-MM-DD)
-  description VARCHAR(255),
+  details VARCHAR(255),
   category_id INT8 REFERENCES categories(id) ON DELETE CASCADE
 );
 
