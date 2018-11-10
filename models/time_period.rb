@@ -2,32 +2,63 @@ require_relative('../db/sql_runner')
 
 class TimePeriod
 
-  attr_accessor :id, :name, :divisors
-
-  @@names = ['daily/weekly', 'fortnightly', '4 weekly', 'monthly', 'quarterly', 'yearly']
+  attr_accessor :id, :name, :divisor
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @divisors = {
-      'daily/weekly' => (1/1),
-      'fortnightly' => (1/2),
-      '4 weekly' => (1/4),
-      'monthly' => (12/52),
-      'quarterly' => (4/52),
-      'yearly' => (1/52)
-    }
+    @divisor = options[''].to_i
   end
 
-  def self.names()
-    return @@names
+  def save()
+    sql = "INSERT INTO bitings
+    (
+      zombie_id,
+      victim_id
+    )
+    VALUES
+    (
+      $1, $2
+    )
+    RETURNING id"
+    values = [@zombie_id, @victim_id]
+    results = SqlRunner.run(sql, values)
+    @id = results.first()['id'].to_i
   end
 
-  def get_divisor()
-    return @divisors[@name]
+  def self.all()
+    sql = "SELECT * FROM bitings"
+    results = SqlRunner.run( sql )
+    return results.map { |biting| Biting.new( biting ) }
   end
 
-  CRUD
+  def victim()
+    sql = "SELECT * FROM victims
+    WHERE id = $1"
+    values = [@victim_id]
+    results = SqlRunner.run( sql, values )
+    return Victim.new( results.first )
+  end
+
+  def zombie()
+    sql = "SELECT * FROM zombies
+    WHERE id = $1"
+    values = [@zombie_id]
+    results = SqlRunner.run( sql, values )
+    return Zombie.new( results.first )
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM bitings"
+    SqlRunner.run( sql )
+  end
+
+  def self.destroy(id)
+    sql = "DELETE FROM bitings
+    WHERE id = $1"
+    values = [id]
+    SqlRunner.run( sql, values )
+  end
 
 
 end
