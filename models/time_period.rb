@@ -2,12 +2,17 @@ require_relative('../db/sql_runner')
 
 class TimePeriod
 
-  attr_accessor :id, :name, :divisor
+  attr_accessor :id, :name, :numerator, :denominator
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @divisor = options[''].to_i
+    @numerator = options[''].to_i
+    @denominator = options[''].to_i
+  end
+
+  def get_divisor
+    return @numerator.to_f / @denominator
   end
 
   def save()

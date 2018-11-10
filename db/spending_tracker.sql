@@ -8,12 +8,15 @@ DROP TABLE IF EXISTS time_periods;
 
 CREATE TABLE time_periods(
   id SERIAL8 PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL,
+  numerator INT,
+  denominator INT
 );
 
 CREATE TABLE category_groups (
   id SERIAL8 PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL,
+  colour VARCHAR(255)
 );
 
 CREATE TABLE categories (
@@ -25,10 +28,11 @@ CREATE TABLE categories (
 CREATE TABLE transactions (
   id SERIAL8 PRIMARY KEY,
   amount FLOAT NOT NULL,
-  date_ DATE NOT NULL,
+  date_ DATE,
   --(YYYY-MM-DD)
   details VARCHAR(255),
-  category_id INT8 REFERENCES categories(id) ON DELETE CASCADE
+  category_id INT8 REFERENCES categories(id) ON DELETE CASCADE,
+  time_period_id INT8 REFERENCES time_periods(id) ON DELETE CASCADE
 );
 
 -- CREATE TABLE budgets (

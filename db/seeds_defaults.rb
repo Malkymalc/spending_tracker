@@ -112,3 +112,51 @@ category10 = Category.new({
   "category_group_id" => "7",
   })
 category10.save()
+
+
+#Time Periods
+time_period1 = TimePeriod.new({
+  "name" => "Daily / Weekly",
+  "numerator" => "1",
+  "denominator" => "1",
+  })
+time_period1.save()
+
+time_period2 = TimePeriod.new({
+  "name" => "Fortnightly",
+  "numerator" => "1",
+  "denominator" => "2",
+  })
+time_period2.save()
+
+time_period3 = TimePeriod.new({
+  "name" => "4 Weekly",
+  "numerator" => "1",
+  "denominator" => "4",
+  })
+time_period3.save()
+
+time_period4 = TimePeriod.new({
+  "name" => "Monthly",
+  "numerator" => "12",
+  "denominator" => "52",
+  })
+time_period4.save()
+
+time_period5 = TimePeriod.new({
+  "name" => "Quarterly",
+  "numerator" => "4",
+  "denominator" => "52",
+  })
+time_period5.save()
+
+time_period6 = TimePeriod.new({
+  "name" => "Yearly",
+  "numerator" => "1",
+  "denominator" => "52",
+  })
+time_period6.save()
+
+
+#binding.pry
+nil
