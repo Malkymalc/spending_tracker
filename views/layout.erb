@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Spending Tracker</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Special+Elite" rel="stylesheet">
+
+  <link rel="icon" href="/images/spending-tracker-icon.png" />
+
+  <link rel="stylesheet" type="text/css" href="/styles/buttons.css">
+  <link rel="stylesheet" type="text/css" href="/styles/elements.css">
+  <link rel="stylesheet" type="text/css" href="/styles/flex.css">
+  <link rel="stylesheet" type="text/css" href="/styles/formscss">
+  <link rel="stylesheet" type="text/css" href="/styles/grid.css">
+  <link rel="stylesheet" type="text/css" href="/styles/tables.css">
+  <link rel="stylesheet" type="text/css" href="/styles/text_fonts_colours.css">
+
+</head>
+<body>
+
+  <header>
+    <banner>
+      <img src="/images/spending-tracker-logo.png" alt="">
+      <h1>Spending Tracker</h1>
+      <h2>Track your spending</h2>
+    </banner>
+
+    <nav>
+      <ul>
+        <li><a href="/spending-tracker/add"></a></li>
+        <li><a href="//spending-tracker/list"></a></li>
+        <li><a href="/spending-tracker/show"></a></li>
+        <li><a href="/spending-tracker/categories"></a></li>
+        <li><a href="/spending-tracker/budget"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <sidebar>
+    <ul>
+      <li><a href="/spending-tracker/add"></a></li>
+      <li><a href="//spending-tracker/list"></a></li>
+      <li><a href="/spending-tracker/show"></a></li>
+      <li><a href="/spending-tracker/categories"></a></li>
+      <li><a href="/spending-tracker/budget"></a></li>
+    </ul>
+  </sidebar>
+
+  <main>
+    <%= yield %>
+  </main>
+
+
+</body>
+</html>
