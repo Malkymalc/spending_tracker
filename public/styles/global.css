@@ -1,0 +1,9 @@
+:root {
+  --grey-dark: hsla(360, 100%, 100%, 0.5);
+  --grey-med: hsla(360, 100%, 100%, 0.5);
+  --grey-light: hsla(360, 100%, 100%, 0.5);
+
+  --main-bold: hsla(360, 100%, 100%, 0.5);
+  --main-med: hsla(360, 100%, 100%, 0.5);
+  --main-light: hsla(360, 100%, 100%, 0.5);
+}

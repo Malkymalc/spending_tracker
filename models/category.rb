@@ -1,8 +1,8 @@
 require_relative('../db/sql_runner')
 
-attr_accessor :id, :name, :category_group_id
-
 class Category
+
+  attr_accessor :id, :name, :category_group_id
 
   def initialize( options )
     @id = options['id'].to_i if options['id']

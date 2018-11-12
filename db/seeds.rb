@@ -9,7 +9,7 @@ TimePeriod.delete_all()
 Category.delete_all()
 CategoryGroup.delete_all()
 
-#Category Group
+#CATEGORY GROUP
 category_group1 = CategoryGroup.new({
   "name" => "Income",
   "colour" => "#adf352",
@@ -52,7 +52,8 @@ category_group7 = CategoryGroup.new({
   })
 category_group7.save()
 
-#Category
+
+#CATEGORY
 category1 = Category.new({
   "name" => "Rent / Mortgage",
   "category_group_id" => "4",
@@ -113,50 +114,68 @@ category10 = Category.new({
   })
 category10.save()
 
+category11 = Category.new({
+  "name" => "Coffee",
+  "category_group_id" => "6",
+  })
+category11.save()
 
-#Time Periods
+
+#TIME PERIODS
 time_period1 = TimePeriod.new({
   "name" => "Daily / Weekly",
-  "numerator" => "1",
-  "denominator" => "1",
+  "numerator" => 52,
+  "denominator" => 52,
   })
 time_period1.save()
 
 time_period2 = TimePeriod.new({
   "name" => "Fortnightly",
-  "numerator" => "1",
-  "denominator" => "2",
+  "numerator" => 26,
+  "denominator" => 52,
   })
 time_period2.save()
 
 time_period3 = TimePeriod.new({
   "name" => "4 Weekly",
-  "numerator" => "1",
-  "denominator" => "4",
+  "numerator" => 13,
+  "denominator" => 52,
   })
 time_period3.save()
 
 time_period4 = TimePeriod.new({
   "name" => "Monthly",
-  "numerator" => "12",
-  "denominator" => "52",
+  "numerator" => 12,
+  "denominator" => 52,
   })
 time_period4.save()
 
 time_period5 = TimePeriod.new({
   "name" => "Quarterly",
-  "numerator" => "4",
-  "denominator" => "52",
+  "numerator" => 4,
+  "denominator" => 52,
   })
 time_period5.save()
 
 time_period6 = TimePeriod.new({
   "name" => "Yearly",
-  "numerator" => "1",
-  "denominator" => "52",
+  "numerator" => 1,
+  "denominator" => 52,
   })
 time_period6.save()
 
+# TRANSACTIONS
 
-#binding.pry
+transaction1 = Transaction.new({
+  "amount" => 10.50,
+  "date_" => "2001-03-26",
+  "details" => "Lots of coffee",
+  "category_id" => 11,
+  "time_period_id" => 1
+  })
+
+binding.pry  
+transaction1.save()
+
+
 nil

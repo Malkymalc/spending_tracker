@@ -31,6 +31,6 @@ post '/spending-tracker/list/all/:id' do
 end
 
 post '/spending-tracker/list/all/:id/delete' do
-  transaction = Transaction.delete( params[:id] )
+  Transaction.delete( params[:id] )
   redirect to ("/spending-tracker/list/all")
 end

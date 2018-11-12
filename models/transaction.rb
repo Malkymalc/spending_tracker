@@ -3,14 +3,14 @@ require 'date'
 
 class Transaction
 
-  attr_accessor :id, :amount, :details, :category_id, :time_period_id
+  attr_accessor :id, :amount, :date, :details, :category_id, :time_period_id
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @amount = options['amount'].to_f
-    @date = Date.parse(options['date'])
+    @date = Date.parse(options['date_'])
     @details = options['details']
-    @category_id = options['category_group_id'].to_i
+    @category_id = options['category_id'].to_i
     @time_period_id = options['time_period_id'].to_i
   end
 
@@ -18,10 +18,10 @@ class Transaction
   def save()
     sql = "
     INSERT INTO transactions
-    (amount, date, details, category_id, category_group_id)
+    (amount, date_, details, category_id, time_period_id)
     VALUES ( $1, $2, $3, $4, $5 )
     RETURNING id"
-    values = [@amount, @date, @details, @category_id, @category_group_id]
+    values = [@amount, @date, @details, @category_id, @time_period_id]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -68,10 +68,10 @@ class Transaction
 
 def update()
     sql = "UPDATE transactions
-    SET (amount, date, details, category_id, category_group_id)
+    SET (amount, date_, details, category_id, time_period_id)
     = ($1, $2, $3, $4, $5)
     WHERE id = $6"
-    values = [@amount, @date, @details, @category_id, @category_group_id, @id]
+    values = [@amount, @date, @details, @category_id, @time_period, @id]
     SqlRunner.run(sql, values)
   end
 

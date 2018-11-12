@@ -7,8 +7,8 @@ class TimePeriod
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @numerator = options[''].to_i
-    @denominator = options[''].to_i
+    @numerator = options['numerator'].to_i
+    @denominator = options['denominator'].to_i
   end
 
   def get_divisor()
