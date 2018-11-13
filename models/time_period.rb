@@ -1,4 +1,5 @@
 require_relative('../db/sql_runner')
+require 'date'
 
 class TimePeriod
 
@@ -11,8 +12,41 @@ class TimePeriod
     @denominator = options['denominator'].to_i
   end
 
-  def self.get_dates(date, range)
-    return [date_start, date_end]
+
+  def self.week_start_end(date)
+    back, forward = 0, 0
+    while (date - back).cwday() != 1
+      back += 1
+    end
+    while (date + forward).cwday() != 7
+      forward += 1
+    end
+    return [(date - back), (date + forward)]
+  end
+
+  def self.month_start_end(date)
+    back, forward = 0, 0
+    #increase back unitl mday is 1 then return date - back
+    while (date - back).mday() != 1
+      back += 1
+    end
+    #increase forward until mday is 1 then return date + (forward - 1)
+    while (date + forward).mday() != 1
+      forward += 1
+    end
+    return [( date - back ), ( date + (forward-1) )]
+  end
+
+  # def self.quarter_start_end(date)
+  #   #increase back unitl mday is 1 then return date - back
+  #   #increase forward until mday is 1 then return date + (forward - 1)
+  #   return [(date - back), (date + (forward)-1)]
+  # end
+
+  def self.date_range(date, range_type)
+    return week_start_end(date) if range_type == 'week'
+    return month_start_end(date) if range_type == 'month'
+    # return quarter_start_end(date) if range_type == 'quarter'
   end
 
   def get_divisor()

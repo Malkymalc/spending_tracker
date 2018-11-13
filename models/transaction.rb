@@ -14,7 +14,63 @@ class Transaction
     @time_period_id = options['time_period_id'].to_i
   end
 
-# CREATE
+#FILTERING METHODS
+  def self.date_filter(transactions_arr, start_end_arr)
+    start, finish = start_end_arr  #could put TimePeriod.date_range(date, range_type) here
+    return transactions_arr.select { |transaction|
+      transaction.date >= start && transaction.date <= finish
+     }
+  end
+
+  def self.category_group_filter(transactions_arr, category_group_ids_arr)
+    return transactions_arr.select { |transaction|
+      category_group__ids_arr.includes?( transaction.category_group().id )
+     }
+  end
+
+#GROUPING METHODS
+  def self.group_by_category_group(transactions_arr)
+    grouping_obj = transactions_arr.reduce({}) { |obj, transaction|
+      c_g_name = transaction.category_group().name
+      obj.has_key?(c_g_name) ? obj[c_g_name].push(transaction) : obj[c_g_name] = [transaction]
+    }
+    return grouping_obj
+  end
+
+  def self.group_by_day(transactions_arr)
+    day = '%A'
+    grouping_obj = transactions_arr.reduce({}) { |obj, transaction|
+      day_name = transaction.date.strftime(day)
+      obj.has_key?(day_name) ? obj[day_name].push(transaction) : obj[day_name] = [transaction]
+    }
+    return grouping_obj
+  end
+
+  def self.group_by_week(transactions_arr)
+    week = '%U'
+    grouping_obj = transactions_arr.reduce({}) { |obj, transaction|
+      week_name = transaction.date.strftime(week)
+      obj.has_key?(week_name) ? obj[week_name].push(transaction) : obj[week_name] = [transaction]
+    }
+    return grouping_obj
+  end
+
+  # SUMMARISING METHODS
+  def self.sum(transactions_arr)
+    return transactions_arr.reduce(0.00) { |total, transaction|
+      total += transaction.get_weekly()
+    }
+  end
+
+  def self.sum_actual(transactions_arr)
+    return transactions_arr.reduce(0.00) { |total, transaction|
+      total += transaction.amount
+    }
+  end
+
+
+# CRUD METHODS
+  # CREATE
   def save()
     sql = "
     INSERT INTO transactions
@@ -26,8 +82,7 @@ class Transaction
     @id = results.first()['id'].to_i
   end
 
-# READ
-
+  # READ
   def time_period()
     sql = "SELECT * FROM time_periods WHERE id = $1"
     values = [@time_period_id]
@@ -64,36 +119,35 @@ class Transaction
     return transactions.map { |transaction| Transaction.new( transaction ) }
   end
 
-# UPDATE
+  # UPDATE
+  def update()
+      sql = "UPDATE transactions
+      SET (amount, date_, details, category_id, time_period_id)
+      = ($1, $2, $3, $4, $5)
+      WHERE id = $6"
+      values = [@amount, @date, @details, @category_id, @time_period, @id]
+      SqlRunner.run(sql, values)
+    end
 
-def update()
-    sql = "UPDATE transactions
-    SET (amount, date_, details, category_id, time_period_id)
-    = ($1, $2, $3, $4, $5)
-    WHERE id = $6"
-    values = [@amount, @date, @details, @category_id, @time_period, @id]
-    SqlRunner.run(sql, values)
-  end
+  # DELETE
+    def delete()
+      sql = "DELETE FROM transactions
+      WHERE id = $1"
+      values = [@id]
+      SqlRunner.run( sql, values )
+    end
 
-# DELETE
-  def delete()
-    sql = "DELETE FROM transactions
-    WHERE id = $1"
-    values = [@id]
-    SqlRunner.run( sql, values )
-  end
+    def self.delete(id)
+      sql = "DELETE FROM transactions
+      WHERE id = $1"
+      values = [id]
+      SqlRunner.run( sql, values )
+    end
 
-  def self.delete(id)
-    sql = "DELETE FROM transactions
-    WHERE id = $1"
-    values = [id]
-    SqlRunner.run( sql, values )
-  end
-
-  def self.delete_all()
-    sql = "DELETE FROM transactions"
-    SqlRunner.run( sql )
-  end
+    def self.delete_all()
+      sql = "DELETE FROM transactions"
+      SqlRunner.run( sql )
+    end
 
 
 
