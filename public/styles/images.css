@@ -1,0 +1,4 @@
+.circle {
+  float: left;
+  shape-outside: circle();
+}

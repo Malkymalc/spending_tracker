@@ -25,7 +25,7 @@ class CategoryGroup
 # READ
   def categories()
     sql = "SELECT * FROM categories
-    WHERE category_group.id = $1"
+    WHERE category_group_id = $1"
     values = [@id]
     categories = SqlRunner.run( sql, values )
     return categories.map { |category| Category.new(category) }
@@ -37,7 +37,7 @@ class CategoryGroup
     ON transactions.category_id = categories.id
     INNER JOIN category_groups
     ON categories.category_group_id = category_groups.id
-    WHERE category_group.id = $1"
+    WHERE category_group_id = $1"
     values = [@id]
     transactions = SqlRunner.run( sql, values )
     return transactions.map { |transaction| Transaction.new(transaction) }
@@ -47,8 +47,8 @@ class CategoryGroup
     sql = "SELECT * FROM category_groups
     WHERE id = $1"
     values = [id]
-    results = SqlRunner.run( sql )
-    return results.map { |category_group| CategoryGroup.new( category_group ) }
+    category_group = SqlRunner.run( sql, values )[0]
+    return  CategoryGroup.new( category_group )
   end
 
   def self.all()

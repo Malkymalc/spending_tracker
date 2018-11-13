@@ -1,9 +1,24 @@
 :root {
-  --grey-dark: hsla(360, 100%, 100%, 0.5);
-  --grey-med: hsla(360, 100%, 100%, 0.5);
-  --grey-light: hsla(360, 100%, 100%, 0.5);
+  --grey-dark: hsl(146, 15%, 10%);
+  --grey-med-dark: hsl(146, 15%, 30%);
+  --grey-med-light: hsl(146, 15%, 50%);
+  --grey-light: hsl(146, 15%, 70%);
+  --grey-lightest: hsl(146, 15%, 80%);
 
-  --main-bold: hsla(360, 100%, 100%, 0.5);
-  --main-med: hsla(360, 100%, 100%, 0.5);
-  --main-light: hsla(360, 100%, 100%, 0.5);
+  --main-bold: hsl(146, 100%, 30%);
+  --main-med: hsl(146, 100%, 45%);
+  --main-light: hsl(146, 100%, 60%);
+}
+
+/* Insert styling for <progress> tag here */
+progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, progress::-moz-progress-bar {
+
+}
+
+body, h1, h2, h3, ul {
+  font-family: helvetica, arial, sans-serif;
+}
+
+.hoz-list {
+  
 }

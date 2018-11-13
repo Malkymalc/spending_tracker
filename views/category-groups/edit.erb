@@ -1,0 +1,38 @@
+<form
+action="/spending-tracker/category-groups/<%= @category_group.id%>"
+method="post">
+
+  <label for="name"> Name: </label>
+  <input type="text" name="name" value="<%= @category_group.name%>">
+
+  <label for="colour"> Colour: </label>
+  <input type="color" name="colour" value="<%= @category_group.colour %>">
+
+  <input type="submit" value="Save">
+</form>
+<form
+action="/spending-tracker/category-groups/<%= @category_group.id%>/delete"
+method="post">
+  <input type="submit" value="Save">
+</form>
+
+<% @category_groups.each { |category_group| %>
+
+  <div style="background-color:<%=category_group.colour%>;">
+    <h3><%= category_group.name %></h3>
+
+    <ul>
+      <% category_group.categories().each { |category| %>
+        <li><%= category.name %></li>
+      <%}%>
+    </ul>
+
+    <form
+      action="/spending-tracker/category-groups/<%= category_group.id%>/edit.html"
+      method="post"
+      >
+        <input type="submit" name="" value="Edit">
+    </form>
+  </div>
+
+<%}%>

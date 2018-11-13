@@ -1,0 +1,19 @@
+.bg-first-letter::first-letter {
+  color: var(--main-bold);
+  font-weight: bold;
+  margin-right: 0.5em;
+  initial-letter: 4;
+  -webkit-initial-letter: 3;
+  initial-letter: 3;
+}
+
+
+.bg-light {
+  background-color: var(--main-light, red);
+}
+.bg-med {
+  background-color: var(--main-med, blue);
+}
+.bg-bold {
+  background-color: var(--main-bold, green);
+}

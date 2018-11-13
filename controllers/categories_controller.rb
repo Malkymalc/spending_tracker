@@ -1,11 +1,11 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
-require_relative('controllers/add_controller')
-require_relative('controllers/list_controller')
-require_relative('controllers/show_controller')
-require_relative('controllers/category_controller')
-require_relative('controllers/budget_controller')
+require_relative('../models/budget.rb')
+require_relative('../models/category.rb')
+require_relative('../models/category_group.rb')
+require_relative('../models/time_period.rb')
+require_relative('../models/transaction.rb')
 also_reload( '../models/*' )
 
 #CREATE
@@ -49,7 +49,7 @@ end
 get '/spending-tracker/categories/all/:id/edit' do
   transactions_all = Transaction.all()
   @to_edit = transactions_all.select { |transaction| transaction.id == params[:id] }
-  @others = transactions_all.select { |transaction| transaction.id != params[:id] }  }
+  @others = transactions_all.select { |transaction| transaction.id != params[:id] }
 
   @category_groups = CategoryGroup.all()
   @categories = Category.all()
@@ -60,7 +60,7 @@ end
 get '/spending-tracker/categories/all/:id/edit' do
   transactions_all = Transaction.all()
   @to_edit = transactions_all.select { |transaction| transaction.id == params[:id] }
-  @others = transactions_all.select { |transaction| transaction.id != params[:id] }  }
+  @others = transactions_all.select { |transaction| transaction.id != params[:id] } 
 
   @category_groups = CategoryGroup.all()
   @categories = Category.all()

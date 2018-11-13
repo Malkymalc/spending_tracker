@@ -174,7 +174,7 @@ transaction1 = Transaction.new({
   "time_period_id" => 1
   })
 
-binding.pry  
+#binding.pry  
 transaction1.save()
 
 

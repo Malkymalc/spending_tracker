@@ -43,7 +43,7 @@ class Category
     sql = "SELECT * FROM categories
     WHERE id = $1"
     values = [id]
-    category = SqlRunner.run( sql )
+    category = SqlRunner.run( sql, values ).first
     return Category.new( category )
   end
 

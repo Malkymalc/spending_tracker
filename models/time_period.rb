@@ -40,7 +40,7 @@ class TimePeriod
     sql = "SELECT * FROM time_periods
     WHERE id = $1"
     values = [id]
-    time_period = SqlRunner.run( sql )
+    time_period = SqlRunner.run( sql, values ).first
     return TimePeriod.new( time_period )
   end
 

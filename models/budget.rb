@@ -1,7 +1,7 @@
 require_relative('../db/sql_runner')
 require 'date'
 
-class Transaction
+class Budget
 
   attr_accessor :id, :amount, :date, :details, :category_id, :time_period_id
 
@@ -54,7 +54,7 @@ class Transaction
     sql = "SELECT * FROM transactions
     WHERE id = $1"
     values = [id]
-    transaction = SqlRunner.run( sql, values ).first
+    transaction = SqlRunner.run( sql )
     return Transaction.new( transaction )
   end
 
