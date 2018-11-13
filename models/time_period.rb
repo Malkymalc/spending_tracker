@@ -11,6 +11,10 @@ class TimePeriod
     @denominator = options['denominator'].to_i
   end
 
+  def self.get_dates(date, range)
+    return [date_start, date_end]
+  end
+
   def get_divisor()
     return @numerator.to_f / @denominator
   end
