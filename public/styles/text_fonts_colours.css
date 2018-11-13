@@ -9,11 +9,11 @@
 
 
 .bg-light {
-  background-color: var(--main-light, red);
+  background-color: var(--main-light);
 }
 .bg-med {
-  background-color: var(--main-med, blue);
+  background-color: var(--main-med);
 }
 .bg-bold {
-  background-color: var(--main-bold, green);
+  background-color: var(--main-bold);
 }

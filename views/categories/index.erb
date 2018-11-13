@@ -1,0 +1,26 @@
+<div>
+<a href="/spending-tracker/category/new">
+  <button type="button">
+    Create New Category
+  </button>
+</a>
+</div>
+
+<% @category_groups.each { |category_group| %>
+
+  <div style="background-color:<%=category_group.colour%>;">
+    <h3><%= category_group.name %></h3>
+  </div>
+
+  <% category_group.categories().each { |category| %>
+
+    <div class="">
+      <h4><%= category.name %></h4>
+
+      <a href="/spending-tracker/categories/<%= category.id%>/edit">
+        <button type="button" name="Edit">Edit</button>
+      </a>
+
+    </div>
+  <%}%>
+<%}%>

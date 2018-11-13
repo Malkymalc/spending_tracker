@@ -1,0 +1,43 @@
+<form
+action="/spending-tracker/categories"
+method="post">
+
+  <label for="name"> Name: </label>
+  <input type="text" name="name">
+
+  <label for="colour"> Category Group: </label>
+  <select class="" name="category_group_id">
+    <%= @category_groups.each { |category_group| %>
+      <option
+      class=""
+      value="<%=category_group.id%>"
+      >
+      <%= category_group.name %>
+      </option>
+    <%= } %>
+  </select>
+
+  <input type="submit" value="Create">
+
+</form>
+
+
+<!-- DISPLAY ALL CATEGORIES AS PER index.erb -->
+<% @category_groups.each { |category_group| %>
+
+  <div style="background-color:<%=category_group.colour%>;">
+    <h3><%= category_group.name %></h3>
+  </div>
+
+  <% category_group.categories().each { |category| %>
+
+    <div class="">
+      <h4><%= category.name %></h4>
+
+      <a href="/spending-tracker/categories/<%= category.id%>/edit">
+        <button type="button" name="Edit">Edit</button>
+      </a>
+
+    </div>
+  <%}%>
+<%}%>
