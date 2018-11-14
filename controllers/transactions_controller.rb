@@ -11,7 +11,7 @@ also_reload( '../models/*' )
 
 # index (Read)
 get '/spending-tracker/transactions' do
-  @today = Date.today()
+  @date = Date.today()
   groups = CategoryGroup.all().map { |cat| cat.id }
   group_by = nil
 
@@ -28,9 +28,9 @@ post '/spending-tracker/transactions/filtered' do
   @time_periods = TimePeriod.all()
 
   #Filtering
-  date = Date.parse(params[:date])
+  @date = Date.parse(params[:date])
   date_range = params[:date_range]
-  start_end = TimePeriod.date_range(date, date_range)
+  start_end = TimePeriod.date_range(@date, date_range)
   groups = params[:groups]
 
   transactions_date = Transaction.date_filter(transactions_all, start_end)
@@ -43,7 +43,7 @@ post '/spending-tracker/transactions/filtered' do
   @t_grouped = Transaction.group_by_day(@transactions) if group_by == 'day'
   @t_grouped = Transaction.group_by_week(@transactions) if group_by == 'week'
   @t_grouped = Transaction.group_by_cat_group(@transactions) if group_by == 'category'
-  binding.pry
+  #binding.pry
   erb (:'transactions/index')
 end
 

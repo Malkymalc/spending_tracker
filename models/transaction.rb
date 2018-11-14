@@ -25,7 +25,9 @@ class Transaction
 
   def self.category_group_filter(transactions_arr, category_group_ids_arr)
     return transactions_arr.select { |transaction|
-      category_group_ids_arr.include?( transaction.category_group().id.to_s )
+      # true == true
+      category_group_ids_arr.include?(transaction.category_group().id.to_s )
+      #     "6")
      }
   end
 
