@@ -11,7 +11,7 @@ also_reload( '../models/*' )
 
 # index (Read)
 get '/spending-tracker/transactions' do
-  date = Date.today()
+  @today = Date.today()
   groups = CategoryGroup.all().map { |cat| cat.id }
   group_by = nil
 
@@ -23,7 +23,7 @@ get '/spending-tracker/transactions' do
 end
 
 post '/spending-tracker/transactions/filtered' do
-  date = params[:date]
+  date = Date.parse(params[:date])
   groups = params[:groups]
   group_by = params[:group_by]
 

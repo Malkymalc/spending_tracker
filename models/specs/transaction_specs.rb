@@ -23,27 +23,58 @@ class TestTransaction < Minitest::Test
       "denominator" => 52
       })
 
+    category_group1 = CategoryGroup.new({
+      "id" => 1,
+      "name" => "Quality of Life",
+      "colour" => "#adf352",
+      })
+
+    category_group2 = CategoryGroup.new({
+      "id" => 2,
+      "name" => "Health",
+      "colour" => "#d58291",
+      })
+
+    category1 = Category.new({
+      "id" => 1,
+      "name" => "Coffeeeee Etc.",
+      "category_group_id" => 1,
+      })
+
+    category2 = Category.new({
+      "id" => 2,
+      "name" => "Cakes",
+      "category_group_id" => 1,
+      })
+
+    category3 = Category.new({
+      "id" => 3,
+      "name" => "Gym",
+      "category_group_id" => 2,
+      })
+
+
     @transaction1 = Transaction.new({
       "amount" => 10.00,
-      "date_" => "2001-11-14",
-      "details" => "Lots of coffee",
-      "category_id" => 11,
+      "date_" => "2018-11-15",
+      "details" => "Venti Filter",
+      "category_id" => 1,
       "time_period_id" => 2
       })
 
     @transaction2 = Transaction.new({
       "amount" => 9.35,
-      "date_" => "2001-11-26",
-      "details" => "Lots of coffee",
-      "category_id" => 11,
+      "date_" => "2018-11-12",
+      "details" => "Cheesecake",
+      "category_id" => 2,
       "time_period_id" => 1
       })
 
     @transaction3 = Transaction.new({
       "amount" => 10.65,
-      "date_" => "2001-08-26",
-      "details" => "Lots of coffee",
-      "category_id" => 11,
+      "date_" => "2018-08-26",
+      "details" => "CSE - Pleasance Gym",
+      "category_id" => 3,
       "time_period_id" => 1
       })
 
@@ -54,15 +85,15 @@ class TestTransaction < Minitest::Test
 
 
   def test_date_filter
-    date_arr = [(Date.today()-2), Date.today()+2]
+    date_arr = [(Date.today()-2), (Date.today()+2)]
     result = Transaction.date_filter(@transactions, date_arr)
     assert_equal([@transaction1, @transaction2], result)
   end
 
   def test_category_group_filter
-    group_arr = []
+    group_arr = [1,2]
     result = Transaction.category_group_filter(@transactions, group_arr)
-    assert_equal([], result)
+    assert_equal([@transaction1, @transaction2], result)
   end
 
   #

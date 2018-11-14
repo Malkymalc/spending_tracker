@@ -6,7 +6,7 @@ method="post">
   <input type="number" name="amount" value="<%= @transaction.amount%>">
 
   <label for="date"> Date: </label>
-  <input type="text" name="date" value="<%= @transaction.date%>">
+  <input type="text" name="date" value="<%= @transaction.date.to_s %>">
 
   <label for="details"> Details: </label>
   <input type="text" name="details" value="<%= @transaction.details%>">

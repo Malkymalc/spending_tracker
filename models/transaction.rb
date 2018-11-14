@@ -1,5 +1,6 @@
 require_relative('../db/sql_runner')
 require 'date'
+require 'pry'
 
 class Transaction
 
@@ -16,17 +17,25 @@ class Transaction
 
 #FILTERING METHODS
   def self.date_filter(transactions_arr, start_end_arr)
-    start, finish = start_end_arr  #could put TimePeriod.date_range(date, range_type) here
+    start_date, end_date = start_end_arr
+    #binding.pry
     return transactions_arr.select { |transaction|
-      transaction.date >= start && transaction.date <= finish
+      transaction.date >= start_date && transaction.date <= end_date
      }
   end
 
   def self.category_group_filter(transactions_arr, category_group_ids_arr)
     return transactions_arr.select { |transaction|
-      category_group__ids_arr.includes?( transaction.category_group().id )
+      category_group_ids_arr.includes?( transaction.category_group().id )
      }
   end
+
+  #For testing without database
+  # def self.category_group_filter(transactions_arr, category_ids_arr)
+  #   return transactions_arr.select { |transaction|
+  #     category_ids_arr.include?( transaction.category_id)
+  #    }
+  # end
 
 #GROUPING METHODS
   def self.group_by_cat(transactions_arr)
