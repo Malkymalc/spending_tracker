@@ -7,7 +7,7 @@ method="post">
 
   <label for="category_group_id"> Category Group: </label>
   <select class="" name="category_group_id">
-    <%= @category_groups.each { |category_group| %>
+    <% @category_groups.each { |category_group| %>
       <option
       class=""
       value="<%=category_group.id%>"
@@ -15,7 +15,7 @@ method="post">
       >
       <%= category_group.name %>
       </option>
-    <%= } %>
+    <% } %>
   </select>
 
   <input type="submit" value="Save">

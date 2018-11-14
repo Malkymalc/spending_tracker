@@ -15,10 +15,6 @@ progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, prog
 
 }
 
-body, h1, h2, h3, ul {
+* {
   font-family: helvetica, arial, sans-serif;
-}
-
-.hoz-list {
-
 }

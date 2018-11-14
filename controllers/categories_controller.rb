@@ -12,11 +12,13 @@ also_reload( '../models/*' )
 get '/spending-tracker/categories' do
   @categories = Category.all()
   @category_groups = CategoryGroup.all()
+
   erb (:'categories/index')
 end
 
 # new (Create)
 get '/spending-tracker/categories/new' do
+  @category_groups = CategoryGroup.all()
   @categories = Category.all()
   erb (:'categories/new')
 end
@@ -29,6 +31,7 @@ end
 
 # edit (Update)
 get '/spending-tracker/categories/:id/edit' do
+  @category_groups = CategoryGroup.all()
   @category = Category.find( params[:id] )
   @categories = Category.all()
   .select { |category|

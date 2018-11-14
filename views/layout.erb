@@ -26,29 +26,33 @@
 <body>
 
   <header class="fixed-top bg-bold">
-    <banner>
+
+    <div class="flex">
+
       <img src="/images/spending-tracker-logo.png" alt="">
       <h1>Spending Tracker</h1>
       <h2>Track your spending</h2>
-    </banner>
 
-    <nav>
-      <ul>
-        <li><a href="/spending-tracker/transactions">Transactions</a></li>
-        <li><a href="/spending-tracker/categories">Categories</a></li>
-        <li><a href="/spending-tracker/category_groups">Category Groups</a></li>
-        <li><a href="//spending-tracker/time_periods">Time Periods</a></li>
-        <li><a href="/spending-tracker/budgets">Budget</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="/spending-tracker/transactions">Transactions</a></li>
+          <li><a href="/spending-tracker/categories">Categories</a></li>
+          <li><a href="/spending-tracker/category-groups">Category Groups</a></li>
+          <li><a href="/spending-tracker/time-periods">Time Periods</a></li>
+          <li><a href="/spending-tracker/budgets">Budget</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
   </header>
 
   <aside class="fixed-left bg-med">
     <ul>
-      <li><a href="/spending-tracker/add">Add</a></li>
-      <li><a href="//spending-tracker/list">List</a></li>
-      <li><a href="/spending-tracker/show">Show</a></li>
-      <li><a href="/spending-tracker/categories">Cat</a></li>
+      <li><a href="/spending-tracker/transactions">Transactions</a></li>
+      <li><a href="/spending-tracker/categories">Categories</a></li>
+      <li><a href="/spending-tracker/category-groups">Category Groups</a></li>
+      <li><a href="/spending-tracker/time-periods">Time Periods</a></li>
       <li><a href="/spending-tracker/budget">Budget</a></li>
     </ul>
   </aside>
@@ -57,9 +61,6 @@
     <%= yield %>
   </main>
 
-  <footer class="footer">
-    <p>This is the footer!!!!!!!!!!</p>
-  </footer>
 
 </body>
 </html>
