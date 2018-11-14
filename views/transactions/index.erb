@@ -71,7 +71,9 @@
                 <td><%=trans.date%></td>
                 <td><%=trans.details%></td>
                 <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
-                <td><input type="text" name="" value=""></td>
+                <td>
+                  <input type="checkbox" name="" value="repeat">
+                </td>
                 <td><%= trans.time_period.name %></td>
                 <td><%= trans.amount %></td>
                 <td><%= trans.get_weekly() %></td>

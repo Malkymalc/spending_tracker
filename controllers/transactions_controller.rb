@@ -23,21 +23,24 @@ get '/spending-tracker/transactions' do
 end
 
 post '/spending-tracker/transactions/filtered' do
-  date = Date.parse(params[:date])
-  groups = params[:groups]
-  group_by = params[:group_by]
-
   transactions_all = Transaction.all()
-  transactions_date = Transaction.date_filter(transactions_all, date)
-  @transactions = Transaction.category_group_filter(transactions_date, groups)
-
-  @t_grouped = nil if group_by == '0' # no grouping
-  @t_grouped = Transaction.group_by_day(@transactions) if group_by == 'day' # day
-  @t_grouped = Transaction.group_by_week(@transactions) if group_by == 'week' # week
-  @t_grouped = Transaction.group_by_cat_group(@transactions) if group_by == 'category' # category
-
   @category_groups = CategoryGroup.all()
   @time_periods = TimePeriod.all()
+
+  #Filtering
+  date = Date.parse(params[:date])
+  date_range = params[:date_range]
+  start_end = TimePeriod.date_range(date, date_range)
+  groups = params[:groups]
+
+  transactions_date = Transaction.date_filter(transactions_all, start_end)
+  @transactions = Transaction.category_group_filter(transactions_date, groups)
+
+  # Grouping
+  @t_grouped = nil if group_by == '0'
+  @t_grouped = Transaction.group_by_day(@transactions) if group_by == 'day'
+  @t_grouped = Transaction.group_by_week(@transactions) if group_by == 'week'
+  @t_grouped = Transaction.group_by_cat_group(@transactions) if group_by == 'category'
 
   erb (:'transactions/index')
 end
