@@ -5,7 +5,7 @@ method="post">
   <label for="name"> Name: </label>
   <input type="text" name="name" value="<%= @category.name%>">
 
-  <label for="colour"> Category Group: </label>
+  <label for="category_group_id"> Category Group: </label>
   <select class="" name="category_group_id">
     <%= @category_groups.each { |category_group| %>
       <option

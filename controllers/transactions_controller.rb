@@ -14,7 +14,7 @@ get '/spending-tracker/transactions' do
   date = Date.today()
   groups = CategoryGroup.all().map { |cat| cat.id }
   group_by = nil
-  
+
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
   @time_periods = TimePeriod.all()
@@ -47,6 +47,7 @@ end
 get '/spending-tracker/transactions/new' do
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
+  @categories = Category.all()
   @time_periods = TimePeriod.all()
   erb (:'transactions/new')
 end
@@ -66,6 +67,7 @@ get '/spending-tracker/transactions/:id/edit' do
   }
 
   @category_groups = CategoryGroup.all()
+  @categories = Category.all()
   @time_periods = TimePeriod.all()
 
   erb (:'transactions/edit')
@@ -82,56 +84,4 @@ post '/spending-tracker/transactions/:id/delete' do
   transaction = Transaction.find( params[:id] )
   transaction.delete()
   redirect to 'spending-tracker/transactions'
-end
-
-
-
-
-
-
-
-
-
-
-get '/spending-tracker/add/new' do
-  @transaction_groups = CategoryGroup.all()
-  @transactions = Transaction.all()
-  @time_periods = TimePeriod.all()
-  erb(:"add/new")
-end
-
-post '/spending-tracker/add' do
-  transaction = Transaction.new( params )
-  transaction.save()
-  #confirmation page?
-  redirect to  ("/spending-tracker/add/new")
-end
-
-
-
-get '/spending-tracker/list/all' do
-  @transactions = Transaction.all()
-  erb(:"list/all")
-end
-
-get '/spending-tracker/list/all/:id/edit' do
-  transactions_all = Transaction.all()
-  @to_edit = transactions_all.select { |transaction| transaction.id == params[:id] }
-  @others = transactions_all.select { |transaction| transaction.id != params[:id] }
-
-  @category_groups = CategoryGroup.all()
-  @categories = Category.all()
-  @time_periods = TimePeriod.all()
-  erb(:"list/edit")
-end
-
-post '/spending-tracker/list/all/:id' do
-  transaction = Transaction.new( params )
-  transaction.update()
-  redirect to ("/spending-tracker/list/all")
-end
-
-post '/spending-tracker/list/all/:id/delete' do
-  Transaction.delete( params[:id] )
-  redirect to ("/spending-tracker/list/all")
 end

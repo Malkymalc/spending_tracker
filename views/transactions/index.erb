@@ -23,7 +23,7 @@
     <fieldset>
       <legend>Select Groups to view: </legend>
 
-      <%= @category_groups.each { |cat_group|  } %>
+      <% @category_groups.each { |cat_group|  } %>
 
         <label
         for="<%= cat_group.name %>">
@@ -35,7 +35,7 @@
         value="<%= cat_group.id %>">
         <br>
 
-      <%= } %>
+      <% } %>
     </fieldset>
 
     <input type="submit" value="Filter/Group">
@@ -76,9 +76,9 @@
                 <td><%= trans.get_weekly() %></td>
               </tr>
             <% }%>
-        <%= } %>
-        
-      <%= else %>
+        <% } %>
+
+      <% else %>
         <!-- Loop over all transactions -->
         <% @transactions.each { |trans| %>
           <tr>
@@ -91,6 +91,6 @@
             <td><%= trans.get_weekly() %></td>
           </tr>
         <% }%>
-      <%= end %>
+      <% end %>
     </tbody>
   </table>

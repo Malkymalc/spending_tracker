@@ -1,0 +1,48 @@
+<form
+action="/spending-tracker/transactions/<%= @transaction.id%>"
+method="post">
+
+  <label for="amount"> Amount: </label>
+  <input type="number" name="amount" value="<%= @transaction.amount%>">
+
+  <label for="date"> Date: </label>
+  <input type="text" name="date" value="<%= @transaction.date%>">
+
+  <label for="details"> Details: </label>
+  <input type="text" name="details" value="<%= @transaction.details%>">
+
+  <!-- Have grouped selection here -->
+  <label for="category_id"> Category: </label>
+  <select class="" name="category_id">
+    <% @category_groups.each { |category_group| %>
+      <optgroup label="<%= category_group.name %>">
+
+      </optgroup>
+
+    <% } %>
+  </select>
+
+  <label for="time_period_id"> Time Period: </label>
+  <select class="" name="time_period_id">
+    <% @time_periods.each { |time_period| %>
+      <option
+      class=""
+      value="<%=time_period.id%>"
+      <%= "selected" if time_period.id == @transaction.time_period_id %>
+      >
+      <%= time_period.name %>
+      </option>
+    <% } %>
+  </select>
+
+
+
+  <input type="submit" value="Save">
+
+</form>
+
+<form
+action="/spending-tracker/transactions/<%= @transaction.id%>/delete"
+method="post">
+  <input type="submit" value="Delete">
+</form>
