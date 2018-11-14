@@ -1,6 +1,7 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
+require 'date'
 require_relative('../models/budget.rb')
 require_relative('../models/category.rb')
 require_relative('../models/category_group.rb')
@@ -10,6 +11,10 @@ also_reload( '../models/*' )
 
 # index (Read)
 get '/spending-tracker/transactions' do
+  date = Date.today()
+  groups = CategoryGroup.all().map { |cat| cat.id }
+  group_by = nil
+  
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
   @time_periods = TimePeriod.all()

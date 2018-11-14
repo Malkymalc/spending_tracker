@@ -1,4 +1,4 @@
-<div class=".sticky-header">
+<div class=".stick-top">
   <form class=""
   action="/spending-tracker/transactions/filtered"
   method="post">
@@ -20,11 +20,77 @@
       <option value="category">Category</option>
     </select>
 
+    <fieldset>
+      <legend>Select Groups to view: </legend>
 
+      <%= @category_groups.each { |cat_group|  } %>
 
+        <label
+        for="<%= cat_group.name %>">
+          <%= cat_group.name %>
+        </label>
+        <input
+        type="checkbox"
+        name="groups"
+        value="<%= cat_group.id %>">
+        <br>
+
+      <%= } %>
+    </fieldset>
+
+    <input type="submit" value="Filter/Group">
   </form>
 
-  <th >
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Details</th>
+        <th>Category</th>
+        <th>Repeat</th>
+        <th>Time Period</th>
+        <th>Amount (Actual)</th>
+        <th>Amount (Weekly)</th>
+      </tr>
+    </thead>
 
-  </th>
-</div>
+    <tbody>
+      <% if @t_grouped != nil %>
+        <%  @t_grouped.each { |group_name, trans_arr| %>
+
+            <tr class="">
+              <td colspan="">
+                <%= group_name %>
+                <!-- 'Group by' header content -->
+              </td>
+            </tr>
+
+            <% trans_arr.each { |trans| %>
+              <tr>
+                <td><%=trans.date%></td>
+                <td><%=trans.details%></td>
+                <td><%=trans.category_group().name / trans.category().name%></td>
+                <td><input type="text" name="" value=""></td>
+                <td><%= trans.time_period.name %></td>
+                <td><%= trans.amount %></td>
+                <td><%= trans.get_weekly() %></td>
+              </tr>
+            <% }%>
+        <%= } %>
+        
+      <%= else %>
+        <!-- Loop over all transactions -->
+        <% @transactions.each { |trans| %>
+          <tr>
+            <td><%=trans.date%></td>
+            <td><%=trans.details%></td>
+            <td><%=trans.category_group().name / trans.category().name%></td>
+            <td><input type="text" name="" value=""></td>
+            <td><%= trans.time_period.name %></td>
+            <td><%= trans.amount %></td>
+            <td><%= trans.get_weekly() %></td>
+          </tr>
+        <% }%>
+      <%= end %>
+    </tbody>
+  </table>
