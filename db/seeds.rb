@@ -168,7 +168,7 @@ time_period6.save()
 
 transaction1 = Transaction.new({
   "amount" => 10.50,
-  "date_" => "2001-03-26",
+  "date_" => "2018-11-15",
   "details" => "Lots of coffee",
   "category_id" => 11,
   "time_period_id" => 1

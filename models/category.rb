@@ -24,10 +24,9 @@ class Category
 
 # READ
   def category_group()
-    sql = "SELECT * FROM category_groups
-    WHERE category_group_id = $1"
+    sql = "SELECT * FROM category_groups WHERE id = $1"
     values = [@category_group_id]
-    category_group = SqlRunner.run( sql, values )
+    category_group = SqlRunner.run( sql, values )[0]
     return CategoryGroup.new(category_group)
   end
 

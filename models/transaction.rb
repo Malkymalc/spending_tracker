@@ -1,6 +1,6 @@
 require_relative('../db/sql_runner')
 require 'date'
-require 'pry'
+require("pry-byebug")
 
 class Transaction
 
@@ -18,7 +18,6 @@ class Transaction
 #FILTERING METHODS
   def self.date_filter(transactions_arr, start_end_arr)
     start_date, end_date = start_end_arr
-    #binding.pry
     return transactions_arr.select { |transaction|
       transaction.date >= start_date && transaction.date <= end_date
      }
@@ -26,7 +25,7 @@ class Transaction
 
   def self.category_group_filter(transactions_arr, category_group_ids_arr)
     return transactions_arr.select { |transaction|
-      category_group_ids_arr.includes?( transaction.category_group().id )
+      category_group_ids_arr.include?( transaction.category_group().id )
      }
   end
 
@@ -104,13 +103,14 @@ class Transaction
   end
 
   def category()
-    sql = "SELECT * FROM categories WHERE category_id = $1"
+    sql = "SELECT * FROM categories WHERE id = $1"
     values = [@category_id]
-    category = SqlRunner.run( sql, values )
+    category = SqlRunner.run( sql, values )[0]
     return Category.new(category)
   end
 
   def category_group()
+    #binding.pry
     return category().category_group()
   end
 

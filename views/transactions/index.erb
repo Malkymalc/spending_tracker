@@ -23,7 +23,7 @@
     <fieldset>
       <legend>Select Groups to view: </legend>
 
-      <% @category_groups.each { |cat_group|  } %>
+      <% @category_groups.each { |cat_group| %>
 
         <label
         for="<%= cat_group.name %>">
@@ -32,7 +32,8 @@
         <input
         type="checkbox"
         name="groups"
-        value="<%= cat_group.id %>">
+        value="<%= cat_group.id %>"
+        checked >
         <br>
 
       <% } %>
@@ -69,7 +70,7 @@
               <tr>
                 <td><%=trans.date%></td>
                 <td><%=trans.details%></td>
-                <td><%=trans.category_group().name / trans.category().name%></td>
+                <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
                 <td><input type="text" name="" value=""></td>
                 <td><%= trans.time_period.name %></td>
                 <td><%= trans.amount %></td>
@@ -84,7 +85,7 @@
           <tr>
             <td><%=trans.date%></td>
             <td><%=trans.details%></td>
-            <td><%=trans.category_group().name / trans.category().name%></td>
+            <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
             <td><input type="text" name="" value=""></td>
             <td><%= trans.time_period.name %></td>
             <td><%= trans.amount %></td>
