@@ -43,9 +43,9 @@ class TimePeriod
   #   return [(date - back), (date + (forward)-1)]
   # end
 
-  def self.date_range(date, range_type)
-    return week_start_end(date) if range_type == 'week'
-    return month_start_end(date) if range_type == 'month'
+  def self.date_range(date, date_range)
+    return week_start_end(date) if date_range == 'week'
+    return month_start_end(date) if date_range == 'month'
     # return quarter_start_end(date) if range_type == 'quarter'
   end
 
