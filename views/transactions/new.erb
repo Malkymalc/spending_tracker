@@ -1,0 +1,40 @@
+<form
+action="/spending-tracker/transactions>"
+method="post">
+
+  <label for="amount"> Amount: </label>
+  <input type="number" name="amount">
+
+  <label for="date"> Date: </label>
+  <input type="text" name="date">
+
+  <label for="details"> Details: </label>
+  <input type="text" name="details">
+
+  <!-- Have grouped selection here -->
+  <label for="category_id"> Category: </label>
+  <select class="" name="category_id">
+    <% @category_groups.each { |category_group| %>
+      <optgroup label="<%= category_group.name %>">
+        <% category_group.categories().each { |category| %>
+          <option value="<%= category.id%>"><%= category.name%></option>
+        <% } %>
+      </optgroup>
+    <% } %>
+  </select>
+
+  <label for="time_period_id"> Time Period: </label>
+  <select class="" name="time_period_id">
+    <% @time_periods.each { |time_period| %>
+      <option
+      class=""
+      value="<%=time_period.id%>"
+      >
+      <%= time_period.name %>
+      </option>
+    <% } %>
+  </select>
+
+  <input type="submit" value="Add Transaction">
+
+</form>

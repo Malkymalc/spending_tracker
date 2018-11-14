@@ -16,9 +16,15 @@ method="post">
   <select class="" name="category_id">
     <% @category_groups.each { |category_group| %>
       <optgroup label="<%= category_group.name %>">
-
+        <% category_group.categories().each { |category| %>
+          <option
+          value="<%= category.id%>"
+          <%= "selected" if category.id == @transaction.category_id %>
+          >
+            <%= category.name%>
+          </option>
+        <% } %>
       </optgroup>
-
     <% } %>
   </select>
 
