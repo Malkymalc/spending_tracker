@@ -29,7 +29,7 @@ class Transaction
   end
 
 #GROUPING METHODS
-  def self.group_by_cat_group(transactions_arr)
+  def self.group_by_cat(transactions_arr)
     grouping_obj = transactions_arr.reduce({}) { |obj, transaction|
       c_g_name = transaction.category_group().name
       obj.has_key?(c_g_name) ? obj[c_g_name].push(transaction) : obj[c_g_name] = [transaction]
