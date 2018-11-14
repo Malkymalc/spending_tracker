@@ -33,7 +33,7 @@
         type="checkbox"
         name="groups[]"
         value="<%= cat_group.id %>"
-        checked >
+        <%= "checked" unless !(@groups.include?(cat_group.id.to_s)) %> >
         <br>
 
       <% } %>

@@ -18,6 +18,7 @@ get '/spending-tracker/transactions' do
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
   @time_periods = TimePeriod.all()
+  @groups = @category_groups.map { |cg| cg.id.to_s }
 
   erb (:'transactions/index')
 end
@@ -31,10 +32,10 @@ post '/spending-tracker/transactions/filtered' do
   @date = Date.parse(params[:date])
   date_range = params[:date_range]
   start_end = TimePeriod.date_range(@date, date_range)
-  groups = params[:groups]
+  @groups = params[:groups]
 
   transactions_date = Transaction.date_filter(transactions_all, start_end)
-  @transactions = Transaction.category_group_filter(transactions_date, groups)
+  @transactions = Transaction.category_group_filter(transactions_date, @groups)
 
   # Grouping
   group_by = params[:group_by]
