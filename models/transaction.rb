@@ -15,7 +15,7 @@ class Transaction
     @time_period_id = options['time_period_id'].to_i
   end
 
-#FILTERING METHODS
+# FILTERING METHODS
   def self.date_filter(transactions_arr, start_end_arr)
     start_date, end_date = start_end_arr
     return transactions_arr.select { |transaction|
