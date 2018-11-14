@@ -11,14 +11,14 @@ class TestTimePeriod < Minitest::Test
 
   def test_date_dot_today_works
     result = @date.to_s
-    assert_equal('2018-11-12', result)
+    assert_equal('2018-11-14', result)
   end
 
   def test_week_start_end
     results_arr = TimePeriod.week_start_end(@date)
 
-    assert_equal('2018-11-12', results_arr[0])
-    assert_equal('2018-11-18', results_arr[1])
+    assert_equal('2018-11-12', results_arr[0].to_s)
+    assert_equal('2018-11-18', results_arr[1].to_s)
   end
 
   def test_month_start_end
