@@ -8,7 +8,7 @@
 
     <label for="date_range">Select Date Range</label>
     <select class="" name="date_range">
-      <option value="day">Week</option>
+      <option value="week">Week</option>
       <option value="month">Month</option>
     </select>
 
@@ -31,7 +31,7 @@
         </label>
         <input
         type="checkbox"
-        name="groups"
+        name="groups[]"
         value="<%= cat_group.id %>"
         checked >
         <br>
@@ -88,7 +88,7 @@
             <td><%=trans.date%></td>
             <td><%=trans.details%></td>
             <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
-            <td><input type="text" name="" value=""></td>
+            <td><input type="checkbox" name="" value=""></td>
             <td><%= trans.time_period.name %></td>
             <td><%= trans.amount %></td>
             <td><%= trans.get_weekly() %></td>
