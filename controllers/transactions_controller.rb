@@ -11,14 +11,17 @@ also_reload( '../models/*' )
 
 # index (Read)
 get '/spending-tracker/transactions' do
+  # Defaults
   @date = Date.today()
-  groups = CategoryGroup.all().map { |cat| cat.id }
-  group_by = nil
+  @date_range = "week"
+  @groups = CategoryGroup.all().map { |cat| cat.id.to_s }
+  @group_by = nil
 
+  # Data
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
   @time_periods = TimePeriod.all()
-  @groups = @category_groups.map { |cg| cg.id.to_s }
+  #@groups = @category_groups.map { |cg| cg.id.to_s }
 
   erb (:'transactions/index')
 end
@@ -30,20 +33,20 @@ post '/spending-tracker/transactions/filtered' do
 
   #Filtering
   @date = Date.parse(params[:date])
-  date_range = params[:date_range]
-  start_end = TimePeriod.date_range(@date, date_range)
+  @date_range = params[:date_range]
+  start_end = TimePeriod.date_range(@date, @date_range)
   @groups = params[:groups]
 
   transactions_date = Transaction.date_filter(transactions_all, start_end)
   @transactions = Transaction.category_group_filter(transactions_date, @groups)
 
   # Grouping
-  group_by = params[:group_by]
+  @group_by = params[:group_by]
 
-  @t_grouped = nil if group_by == '0'
-  @t_grouped = Transaction.group_by_day(@transactions) if group_by == 'day'
-  @t_grouped = Transaction.group_by_week(@transactions) if group_by == 'week'
-  @t_grouped = Transaction.group_by_cat_group(@transactions) if group_by == 'category'
+  @t_grouped = nil if @group_by == '0'
+  @t_grouped = Transaction.group_by_day(@transactions) if @group_by == 'day'
+  @t_grouped = Transaction.group_by_week(@transactions) if @group_by == 'week'
+  @t_grouped = Transaction.group_by_cat_group(@transactions) if @group_by == 'category'
   #binding.pry
   erb (:'transactions/index')
 end
@@ -51,6 +54,7 @@ end
 
 # new (Create)
 get '/spending-tracker/transactions/new' do
+  @today = Date.today()
   @transactions = Transaction.all()
   @category_groups = CategoryGroup.all()
   @categories = Category.all()

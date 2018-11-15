@@ -5,8 +5,8 @@ method="post">
   <label for="amount"> Amount: </label>
   <input type="number" name="amount" value="<%= @transaction.amount%>">
 
-  <label for="date"> Date: </label>
-  <input type="text" name="date" value="<%= @transaction.date.to_s %>">
+  <label for="date_"> Date: </label>
+  <input type="text" name="date_" value="<%= @transaction.date.to_s %>">
 
   <label for="details"> Details: </label>
   <input type="text" name="details" value="<%= @transaction.details%>">
@@ -33,7 +33,7 @@ method="post">
     <% @time_periods.each { |time_period| %>
       <option
       class=""
-      value="<%=time_period.id%>"
+      value="<%= time_period.id %>"
       <%= "selected" if time_period.id == @transaction.time_period_id %>
       >
       <%= time_period.name %>

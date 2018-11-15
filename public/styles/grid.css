@@ -5,8 +5,7 @@
   grid-template-areas:
     "header"
     "main"
-    "sidebar"
-    "footer";
+    "sidebar";
 }
 
 @media (min-width: 500px) {
@@ -17,7 +16,7 @@
     grid-template-areas:
       "header  header"
       "sidebar main"
-      "sidebar  footer";
+      "sidebar  main";
   }
 }
 
@@ -30,7 +29,7 @@
     grid-template-areas:
     "header  header"
     "sidebar main"
-    "sidebar  footer";
+    "sidebar  main";
    }
 }
 
@@ -39,7 +38,13 @@
 }
 .main {
   grid-area: main;
+  overflow: scroll;
 }
+
+tbody {
+  overflow-y: scroll;
+}
+
 .sidebar {
   grid-area: sidebar;
 }

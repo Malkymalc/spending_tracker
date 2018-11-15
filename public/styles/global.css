@@ -18,3 +18,41 @@ progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, prog
 * {
   font-family: helvetica, arial, sans-serif;
 }
+
+a {
+  text-decoration: none;
+  color: honeydew;
+  text-shadow: 0.2px 0.2px 0.2px lightgrey;
+}
+
+a:hover {
+  color: white;
+  text-shadow: 0.5px 0.5px 0.5px lightgrey;
+}
+
+ul {
+  margin: 0;
+  padding-top: 1vw;
+  padding-left: 2vw;
+  list-style: none;
+}
+
+li {
+  margin: 0.5vw;
+}
+
+header li {
+  display: inline-block;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  border: 1px solid grey;
+  text-align: center;
+}
+
+tbody > tr:hover {background-color: #d9d9d9;}

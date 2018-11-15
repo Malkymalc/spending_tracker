@@ -25,9 +25,7 @@ class Transaction
 
   def self.category_group_filter(transactions_arr, category_group_ids_arr)
     return transactions_arr.select { |transaction|
-      # true == true
       category_group_ids_arr.include?(transaction.category_group().id.to_s )
-      #     "6")
      }
   end
 
@@ -133,10 +131,10 @@ class Transaction
   # UPDATE
   def update()
       sql = "UPDATE transactions
-      SET (amount, date_, details, category_id, time_period_id)
+      SET (amount, date_ , details, category_id, time_period_id)
       = ($1, $2, $3, $4, $5)
       WHERE id = $6"
-      values = [@amount, @date, @details, @category_id, @time_period, @id]
+      values = [@amount, @date, @details, @category_id, @time_period_id, @id]
       SqlRunner.run(sql, values)
     end
 

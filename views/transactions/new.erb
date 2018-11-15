@@ -1,12 +1,12 @@
 <form
-action="/spending-tracker/transactions>"
+action="/spending-tracker/transactions"
 method="post">
 
   <label for="amount"> Amount: </label>
   <input type="number" name="amount">
 
-  <label for="date"> Date: </label>
-  <input type="text" name="date">
+  <label for="date_"> Date: </label>
+  <input type="date" name="date_" value="<%= @today %>">
 
   <label for="details"> Details: </label>
   <input type="text" name="details">

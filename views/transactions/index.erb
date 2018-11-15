@@ -1,4 +1,7 @@
 <div class=".stick-top">
+
+
+  <a href="/spending-tracker/transactions/new"><button>Add Transaction</button></a>
   <form class=""
   action="/spending-tracker/transactions/filtered"
   method="post">
@@ -8,16 +11,28 @@
 
     <label for="date_range">Select Date Range</label>
     <select class="" name="date_range">
-      <option value="week">Week</option>
-      <option value="month">Month</option>
+      <option value="week"
+      <%= "selected" unless @date_range == "month" %>
+      >Week</option>
+      <option value="month"
+      <%= "selected" if @date_range == "month" %>
+      >Month</option>
     </select>
 
     <label for="group_by">Group By...</label>
     <select class="" name="group_by">
-      <option value="0"> - </option>
-      <option value="day">Day</option>
-      <option value="week">Week</option>
-      <option value="category">Category</option>
+      <option value="0"
+      <%= "selected" if @group_by == nil %>
+      > - </option>
+      <option value="day"
+      <%= "selected" if @group_by == "day" %>
+      > Day </option>
+      <option value="week"
+      <%= "selected" if @group_by == "week" %>
+      >Week</option>
+      <option value="category"
+      <%= "selected" if @group_by == "category" %>
+      >Category</option>
     </select>
 
     <fieldset>
@@ -41,9 +56,10 @@
 
     <input type="submit" value="Filter/Group">
   </form>
+</div>
 
   <table>
-    <thead>
+    <thead class=".stick-top">
       <tr>
         <th>Date</th>
         <th>Details</th>
@@ -52,6 +68,7 @@
         <th>Time Period</th>
         <th>Amount (Actual)</th>
         <th>Amount (Weekly)</th>
+        <th>Edit</th>
       </tr>
     </thead>
 
@@ -70,13 +87,14 @@
               <tr>
                 <td><%=trans.date%></td>
                 <td><%=trans.details%></td>
-                <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
+                <td> <%= trans.category_group().name + "  /  " + trans.category().name %> </td>
                 <td>
                   <input type="checkbox" name="" value="repeat">
                 </td>
                 <td><%= trans.time_period.name %></td>
-                <td><%= trans.amount %></td>
-                <td><%= trans.get_weekly() %></td>
+                <td><%= "£" + trans.amount.round(2).to_s %></td>
+                <td><%= "£" + trans.get_weekly().round(2).to_s %></td>
+                <td><a href="/spending-tracker/transactions/<%=trans.id%>/edit"><button>Edit</button></a></td>
               </tr>
             <% }%>
         <% } %>
@@ -87,11 +105,13 @@
           <tr>
             <td><%=trans.date%></td>
             <td><%=trans.details%></td>
-            <td> <%= trans.category_group().name + "/" + trans.category().name %> </td>
+            <td> <%= trans.category_group().name + "  /  " + trans.category().name %> </td>
             <td><input type="checkbox" name="" value=""></td>
-            <td><%= trans.time_period.name %></td>
-            <td><%= trans.amount %></td>
-            <td><%= trans.get_weekly() %></td>
+            <td><%= trans.time_period.id %></td>
+            <td><%= "£" + trans.amount.round(2).to_s %></td>
+            <td><%= "£" + trans.get_weekly().round(2).to_s %></td>
+            <td><a href="/spending-tracker/transactions/<%=trans.id%>/edit"><button>Edit</button></a></td>
+
           </tr>
         <% }%>
       <% end %>
